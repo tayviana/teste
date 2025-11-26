@@ -1,0 +1,7 @@
+{
+  "name": "vivafit",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
