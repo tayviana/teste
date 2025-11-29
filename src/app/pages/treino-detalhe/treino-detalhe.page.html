@@ -1,0 +1,63 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="Voltar"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Treino {{ tipoTreino }}</ion-title>
+    <ion-badge slot="end" color="medium" style="margin-right: 15px;">{{ biotipo }}</ion-badge>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" style="--background: #f4f6f8; padding-bottom: 100px;">
+
+  <!-- ÁREA DO VÍDEO -->
+  <div class="video-card">
+    <iframe [src]="videoSafeUrl" title="Vídeo do Treino" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+
+  <div class="info-header">
+    <h2>Foco do dia:</h2>
+    <p>{{ treinoAtual.foco }}</p>
+  </div>
+
+  <h3 class="lista-title">Desafio de Hoje</h3>
+
+  <!-- LISTA DE EXERCÍCIOS -->
+  <ion-list lines="none" style="background: transparent;">
+    
+    <!-- Loop sobre o ESTADO dos exercícios (que contém o checkbox) -->
+    <ion-item *ngFor="let ex of exerciciosEstado" class="exercicio-item">
+      
+      <!-- Checkbox ligado ao modelo de dados (ngModel) -->
+      <ion-checkbox slot="start" color="success" [(ngModel)]="ex.checked"></ion-checkbox>
+      
+      <ion-label>
+        <h3 style="font-weight: 700; color: #333;">{{ ex.nome }}</h3>
+        <p style="color: #666;">
+          <b style="color: var(--ion-color-primary-shade);">{{ ex.serie }}</b> • {{ ex.dica }}
+        </p>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+
+  <!-- CARTÃO DE MOTIVAÇÃO -->
+  <ion-card color="success" class="dica-card">
+    <ion-card-content style="display: flex; align-items: center; gap: 10px;">
+      <ion-icon name="water" style="font-size: 24px; color: white;"></ion-icon>
+      <div style="color: white;">
+        <strong>Hidratação:</strong>
+        <br>Beba pelo menos 500ml de água durante este treino.
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- BOTÃO FLUTUANTE DE SALVAR -->
+  <div class="save-btn-container">
+    <ion-button expand="block" shape="round" color="primary" (click)="salvarTreino()" style="height: 55px; --box-shadow: 0 4px 15px rgba(0, 230, 118, 0.4);">
+      <ion-icon name="checkmark-done" slot="start"></ion-icon>
+      Finalizar Treino de Hoje
+    </ion-button>
+  </div>
+
+</ion-content>

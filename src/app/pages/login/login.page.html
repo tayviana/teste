@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Login VIVAFIT</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div style="text-align: center; margin-top: 50px;">
+    <h1>Bem-vindo ao VIVAFIT</h1>
+    <p>Seu parceiro de saúde</p>
+  </div>
+
+  <ion-item class="ion-margin-top">
+    <ion-label position="floating">E-mail</ion-label>
+    <ion-input type="email" [(ngModel)]="email"></ion-input>
+  </ion-item>
+
+  <ion-item class="ion-margin-top">
+    <ion-label position="floating">Senha</ion-label>
+    <ion-input type="password" [(ngModel)]="senha"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" color="success" class="ion-margin-top" (click)="logar()">
+    Entrar
+  </ion-button>
+
+  <div class="ion-text-center ion-margin-top">
+    <p>Não tem conta?</p>
+    <ion-button fill="outline" color="success" routerLink="/cadastro">
+      Criar Nova Conta
+    </ion-button>
+  </div>
+</ion-content>

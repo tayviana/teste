@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Criar Conta VIVAFIT</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+  <div class="ion-text-center ion-margin-bottom">
+    <h2>Junte-se ao VIVAFIT</h2>
+    <p>Preencha seus dados para começar.</p>
+  </div>
+
+  <ion-item>
+    <ion-label position="floating">Nome Completo</ion-label>
+    <ion-input type="text" [(ngModel)]="nome"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">CPF (apenas números)</ion-label>
+    <!-- Adicionei o campo CPF aqui -->
+    <ion-input type="text" maxlength="14" [(ngModel)]="cpf" placeholder="000.000.000-00"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">E-mail</ion-label>
+    <ion-input type="email" [(ngModel)]="email" placeholder="seu@email.com"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Senha (Mín 6 caracteres)</ion-label>
+    <ion-input type="password" [(ngModel)]="senha"></ion-input>
+  </ion-item>
+
+  <!-- Dados para o cálculo do VIVAFIT -->
+  <ion-item>
+    <ion-label position="floating">Peso (kg)</ion-label>
+    <ion-input type="number" [(ngModel)]="peso"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Altura (ex: 1.75)</ion-label>
+    <ion-input type="number" [(ngModel)]="altura"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" color="success" class="ion-margin-top" (click)="cadastrar()">
+    Finalizar Cadastro
+  </ion-button>
+
+</ion-content>

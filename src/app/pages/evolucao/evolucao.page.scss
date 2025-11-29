@@ -1,0 +1,122 @@
+.header-section {
+  background: white;
+  padding: 40px 20px 20px 20px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+  
+  h1 { margin: 0; font-size: 28px; font-weight: 800; color: #222; }
+  p { margin: 5px 0 0 0; color: #888; font-size: 14px; }
+}
+
+.main-content { padding: 20px; padding-bottom: 100px; }
+
+/* CARD DE PESO */
+.weight-card {
+  background: white; border-radius: 20px; padding: 25px;
+  display: flex; justify-content: space-between; align-items: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  margin-bottom: 25px;
+
+  .weight-info {
+    span { font-size: 12px; color: #999; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
+    h2 { font-size: 42px; font-weight: 800; color: #222; margin: 5px 0 0 0; span { font-size: 16px; color: #666; font-weight: 600; } }
+  }
+
+  .badge-status {
+    background: #f0f0f0; padding: 8px 15px; border-radius: 30px;
+    display: flex; align-items: center; gap: 5px; font-weight: 700; font-size: 14px; color: #666;
+
+    &.success { background: #e8f5e9; color: #2e7d32; } /* Verde se perdeu peso */
+    &.danger { background: #ffebee; color: #c62828; } /* Vermelho se ganhou */
+  }
+}
+
+/* RÉGUA DE IMC */
+.imc-container {
+  background: white; padding: 20px; border-radius: 20px; margin-bottom: 30px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+
+  .imc-header {
+    display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 14px; color: #444;
+    .imc-label { font-weight: 700; color: var(--ion-color-primary); }
+  }
+
+  .progress-track {
+    height: 10px; background: linear-gradient(to right, #42a5f5 0%, #66bb6a 50%, #ef5350 100%);
+    border-radius: 10px; position: relative; margin-bottom: 10px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    /* O background gradient já está no track, o fill pode ser transparente ou usado para animação */
+    border-radius: 10px;
+  }
+
+  .marker {
+    position: absolute; top: -5px; width: 4px; height: 20px;
+    background: #222; border-radius: 2px; transform: translateX(-50%);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    transition: left 0.5s ease-out; /* Animação suave */
+  }
+
+  .imc-legend {
+    display: flex; justify-content: space-between; font-size: 10px; color: #aaa; font-weight: 600; text-transform: uppercase;
+  }
+}
+
+/* ÁREA DE INPUT */
+.section-title { font-size: 18px; font-weight: 700; color: #222; margin-bottom: 15px; }
+
+.input-card {
+  background: white; border-radius: 16px; padding: 15px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+
+  .input-wrapper {
+    display: flex; align-items: center; background: #f9f9f9;
+    border-radius: 12px; padding: 0 15px; margin-bottom: 15px; border: 1px solid #eee;
+    
+    ion-icon { font-size: 20px; color: #999; margin-right: 10px; }
+    input {
+      width: 100%; border: none; background: transparent; height: 50px; font-size: 16px; font-weight: 600; color: #333; outline: none;
+    }
+  }
+}
+
+/* LISTA DE HISTÓRICO */
+.history-item {
+  display: flex; justify-content: space-between; align-items: center;
+  background: white; padding: 15px; border-radius: 12px; margin-bottom: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+
+  .date-box { 
+    display: flex; align-items: center; gap: 8px; color: #888; font-size: 13px; 
+    ion-icon { color: var(--ion-color-primary); }
+  }
+  .weight-box { font-size: 16px; font-weight: 700; color: #333; }
+  .type-box { font-size: 11px; background: #eee; padding: 4px 8px; border-radius: 8px; color: #666; font-weight: 600; }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 20px;
+  color: #999;
+  font-style: italic;
+}
+
+/* MENU INFERIOR (Opcional se já estiver global, mas bom garantir) */
+.bottom-tab-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: white; padding: 15px 30px;
+  display: flex; justify-content: space-between;
+  border-top: 1px solid #f0f0f0;
+  max-width: 480px; margin: 0 auto;
+  z-index: 100;
+
+  .tab-item {
+    display: flex; flex-direction: column; align-items: center; color: #ccc; font-size: 10px; gap: 4px; cursor: pointer;
+    ion-icon { font-size: 24px; }
+    &.active { color: #222; ion-icon { color: var(--ion-color-primary); } }
+  }
+}

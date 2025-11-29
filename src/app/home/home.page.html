@@ -1,20 +1,96 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" style="--background: #f8f9fd;">
+  
+  <div class="header-section">
+    <div class="top-row">
+      <div>
+        <p class="greeting">Bem-vindo de volta,</p>
+        <h1 class="user-name">{{ userData?.nome?.split(' ')[0] || 'Atleta' }}!</h1>
+      </div>
+      <div class="profile-btn" routerLink="/perfil">
+        <img [src]="userData?.fotoBase64 || 'assets/icon/favicon.png'" />
+      </div>
+    </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <!-- CALENDÁRIO DINÂMICO -->
+    <div class="calendar-strip">
+      <div class="month-label">{{ mesAtual }}</div>
+      
+      <div class="days-container">
+        <div class="day-box" 
+             *ngFor="let item of diasCalendario" 
+             [class.active]="item.isHoje">
+          <span>{{ item.semana }}</span>
+          <b>{{ item.dia }}</b>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="main-content">
+    
+    <div class="section-header">
+      <h3>Seu Protocolo</h3>
+      <span class="badge-bio">{{ biotipo }}</span>
+    </div>
+
+    <!-- CARDS DE TREINO -->
+    <div class="workout-card" (click)="abrirTreino('A')">
+      <div class="card-left green-bg">
+        <span class="letter">A</span>
+      </div>
+      <div class="card-center">
+        <h4>Treino A - Superiores</h4>
+        <p>Peito, Ombro e Tríceps</p>
+      </div>
+      <div class="card-right">
+        <ion-icon name="chevron-forward"></ion-icon>
+      </div>
+    </div>
+
+    <div class="workout-card" (click)="abrirTreino('B')">
+      <div class="card-left blue-bg">
+        <span class="letter">B</span>
+      </div>
+      <div class="card-center">
+        <h4>Treino B - Inferiores</h4>
+        <p>Pernas Completas</p>
+      </div>
+      <div class="card-right">
+        <ion-icon name="chevron-forward"></ion-icon>
+      </div>
+    </div>
+
+    <div class="workout-card" (click)="abrirTreino('C')">
+      <div class="card-left orange-bg">
+        <span class="letter">C</span>
+      </div>
+      <div class="card-center">
+        <h4>Treino C - Cardio</h4>
+        <p>Aeróbico e Abdômen</p>
+      </div>
+      <div class="card-right">
+        <ion-icon name="chevron-forward"></ion-icon>
+      </div>
+    </div>
+
   </div>
 </ion-content>
+
+<!-- MENU INFERIOR FIXO -->
+<div class="bottom-tab-bar">
+  <div class="tab-item active">
+    <ion-icon name="grid"></ion-icon>
+    <span>Home</span>
+  </div>
+  
+  <!-- CORRIGIDO AQUI: Adicionei o routerLink -->
+  <div class="tab-item" routerLink="/evolucao">
+    <ion-icon name="stats-chart"></ion-icon>
+    <span>Evolução</span>
+  </div>
+  
+  <div class="tab-item" routerLink="/perfil">
+    <ion-icon name="person"></ion-icon>
+    <span>Perfil</span>
+  </div>
+</div>

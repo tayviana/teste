@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Painel Administrativo</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="dark">
+    <ion-searchbar placeholder="Buscar aluno por nome..." (ionInput)="filtrarUsuarios($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="stats-cards">
+    <ion-card color="primary">
+      <ion-card-content>
+        <h1>{{ listaUsuarios.length }}</h1>
+        <p>Alunos Totais</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Gerenciar Alunos</ion-label>
+    </ion-list-header>
+
+    <!-- ITEM CLICÁVEL: Agora chama uma função em vez de usar routerLink direto -->
+    <ion-item *ngFor="let user of listaFiltrada" button (click)="abrirDetalhes(user)">
+      
+      <!-- Foto do Usuário -->
+      <ion-avatar slot="start">
+        <img [src]="user.fotoBase64 || 'assets/icon/favicon.png'" />
+      </ion-avatar>
+      
+      <ion-label>
+        <h2>
+          {{ user.nome }}
+          <!-- Selo visual se for admin -->
+          <ion-badge color="warning" *ngIf="user.role === 'admin'" style="margin-left: 5px; font-size: 10px;">ADMIN</ion-badge>
+        </h2>
+        <p>{{ user.email }}</p>
+        <div style="margin-top: 5px;">
+          <ion-badge color="light">{{ user.biotipo || 'Sem Biotipo' }}</ion-badge>
+          <ion-badge color="success" style="margin-left: 5px;" *ngIf="user.peso">{{ user.peso }}kg</ion-badge>
+        </div>
+      </ion-label>
+
+      <!-- BOTÕES DE AÇÃO -->
+      <!-- Usamos um z-index alto ou slot="end" para garantir o clique -->
+      
+      <!-- Botão Admin (Escudo) -->
+      <ion-button fill="clear" slot="end" [color]="user.role === 'admin' ? 'warning' : 'medium'" (click)="toggleAdmin(user, $event)">
+        <ion-icon slot="icon-only" [name]="user.role === 'admin' ? 'shield' : 'shield-outline'"></ion-icon>
+      </ion-button>
+
+      <!-- Botão Excluir -->
+      <ion-button fill="clear" slot="end" color="danger" (click)="excluirUsuario(user.id, $event)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+
+    </ion-item>
+  </ion-list>
+
+</ion-content>

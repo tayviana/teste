@@ -1,0 +1,100 @@
+<ion-content [fullscreen]="true" style="--background: #f8f9fd;">
+  
+  <div class="header-section">
+    <h1>Sua Evolução</h1>
+    <p>Acompanhe suas conquistas diárias.</p>
+  </div>
+
+  <div class="main-content">
+
+    <!-- CARD PRINCIPAL: PESO ATUAL -->
+    <div class="weight-card">
+      <div class="weight-info">
+        <span>Peso Atual</span>
+        <h2>{{ userData.peso || '--' }} <span>kg</span></h2>
+      </div>
+      
+      <!-- Indicador de Tendência -->
+      <div class="badge-status" [class.success]="diferencaPeso < 0" [class.danger]="diferencaPeso > 0">
+        <ion-icon [name]="diferencaPeso > 0 ? 'trending-up' : 'trending-down'"></ion-icon>
+        <span *ngIf="diferencaPeso !== 0">{{ diferencaPeso | number:'1.1-1' }} kg</span>
+        <span *ngIf="diferencaPeso === 0">Estável</span>
+      </div>
+    </div>
+
+    <!-- RÉGUA DE IMC (VISUAL) -->
+    <div class="imc-container">
+      <div class="imc-header">
+        <span>Seu IMC: <b>{{ imcAtual | number:'1.1-1' }}</b></span>
+        <span class="imc-label">{{ userData.biotipo || 'Calculando...' }}</span>
+      </div>
+      
+      <!-- Barra de Progresso Customizada -->
+      <div class="progress-track">
+        <!-- A largura (width) é dinâmica baseada no cálculo do IMC -->
+        <div class="progress-fill" [style.width.%]="progressoBarra"></div>
+        <!-- O marcador (bolinha) também se move -->
+        <div class="marker" [style.left.%]="progressoBarra"></div>
+      </div>
+      
+      <div class="imc-legend">
+        <span>Magro</span>
+        <span>Ideal</span>
+        <span>Sobrepeso</span>
+      </div>
+    </div>
+
+    <!-- ÁREA DE REGISTRO -->
+    <h3 class="section-title">Atualizar Medidas</h3>
+    <div class="input-card">
+      <div class="input-wrapper">
+        <ion-icon name="scale"></ion-icon>
+        <input type="number" [(ngModel)]="novoPeso" placeholder="Novo peso (kg)">
+      </div>
+      <ion-button expand="block" shape="round" color="primary" (click)="registrarNovoPeso()" [disabled]="!novoPeso">
+        Registrar Agora
+      </ion-button>
+    </div>
+
+    <!-- HISTÓRICO RECENTE -->
+    <h3 class="section-title" style="margin-top: 30px;">Histórico Recente</h3>
+    
+    <div class="history-list">
+      <div class="history-item" *ngFor="let item of historicoPesos">
+        <div class="date-box">
+          <ion-icon name="time"></ion-icon>
+          <span>{{ item.dataFormatada }}</span>
+        </div>
+        <div class="weight-box">
+          <b>{{ item.peso }}</b> kg
+        </div>
+        <div class="type-box">
+          {{ item.biotipoNaEpoca }}
+        </div>
+      </div>
+      
+      <!-- Mensagem se não tiver histórico -->
+      <div *ngIf="historicoPesos.length === 0" class="empty-state">
+        <p>Nenhum registro ainda. Comece hoje!</p>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>
+
+<!-- MENU INFERIOR FIXO -->
+<div class="bottom-tab-bar">
+  <div class="tab-item" routerLink="/home">
+    <ion-icon name="grid"></ion-icon>
+    <span>Home</span>
+  </div>
+  <div class="tab-item active" routerLink="/evolucao">
+    <ion-icon name="stats-chart"></ion-icon>
+    <span>Evolução</span>
+  </div>
+  <div class="tab-item" routerLink="/perfil">
+    <ion-icon name="person"></ion-icon>
+    <span>Perfil</span>
+  </div>
+</div>

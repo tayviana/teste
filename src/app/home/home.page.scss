@@ -1,27 +1,98 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.header-section {
+  background: #ffffff;
+  padding: 40px 20px 20px 20px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.top-row {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;
+  .greeting { font-size: 14px; color: #888; margin: 0; }
+  .user-name { font-size: 26px; font-weight: 800; margin: 0; color: #222; }
+  .profile-btn {
+    width: 50px; height: 50px; border-radius: 50%; overflow: hidden;
+    border: 2px solid var(--ion-color-primary);
+    img { width: 100%; height: 100%; object-fit: cover; }
+  }
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+/* --- CALENDÁRIO ESTILO PRINT --- */
+.calendar-strip {
+  .month-label {
+    font-size: 12px; font-weight: 800; color: #999; 
+    letter-spacing: 1.5px; margin-bottom: 15px; text-transform: uppercase;
+  }
+  
+  .days-container {
+    display: flex; justify-content: space-between;
+  }
+  
+  .day-box {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    width: 45px; height: 70px; 
+    border-radius: 16px; 
+    background: #f8f9fd; /* Fundo cinza bem clarinho igual ao print */
+    
+    span { font-size: 11px; color: #aaa; margin-bottom: 5px; font-weight: 500; }
+    b { font-size: 18px; color: #333; font-weight: 800; }
+    
+    &.active {
+      background: #00e676; /* Verde Neon */
+      box-shadow: 0 5px 20px rgba(0, 230, 118, 0.3);
+      transform: translateY(-3px);
+      
+      /* No seu print, o texto do ativo é PRETO, então mantivemos escuro */
+      span { color: #004d26; opacity: 0.8; }
+      b { color: #000000; } 
+    }
+  }
 }
 
-#container a {
-  text-decoration: none;
+.main-content { padding: 25px; }
+
+.section-header {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+  h3 { font-size: 18px; font-weight: 700; margin: 0; color: #222; }
+  .badge-bio {
+    background: #e0f2f1; color: #00695c; padding: 5px 12px;
+    border-radius: 20px; font-size: 11px; font-weight: 700;
+  }
+}
+
+.workout-card {
+  background: white; border-radius: 20px; padding: 15px;
+  display: flex; align-items: center; margin-bottom: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+  transition: transform 0.1s; cursor: pointer;
+  &:active { transform: scale(0.98); }
+
+  .card-left {
+    width: 55px; height: 55px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    margin-right: 15px; font-size: 22px; font-weight: 800; color: white;
+    &.green-bg { background: linear-gradient(135deg, #00e676, #00c853); }
+    &.blue-bg { background: linear-gradient(135deg, #2979ff, #2962ff); }
+    &.orange-bg { background: linear-gradient(135deg, #ff9100, #ff6d00); }
+  }
+  .card-center {
+    flex: 1;
+    h4 { margin: 0; font-size: 16px; font-weight: 700; color: #333; }
+    p { margin: 4px 0 0; font-size: 12px; color: #999; }
+  }
+  .card-right ion-icon { font-size: 20px; color: #ccc; }
+}
+
+.bottom-tab-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: white; padding: 15px 30px;
+  display: flex; justify-content: space-between;
+  border-top: 1px solid #f0f0f0;
+  max-width: 480px; margin: 0 auto; /* Centraliza no PC */
+
+  .tab-item {
+    display: flex; flex-direction: column; align-items: center; color: #ccc; font-size: 10px; gap: 4px;
+    ion-icon { font-size: 24px; }
+    &.active { color: #00ca68; }
+  }
 }

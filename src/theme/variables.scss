@@ -1,2 +1,39 @@
-// For information on how to create your own theme, please refer to:
-// https://ionicframework.com/docs/theming/
+// Força o tema claro e define as cores do VIVAFIT
+:root {
+  /* Cor Primária: Verde Neon VIVAFIT */
+  --ion-color-primary: #00e676;
+  --ion-color-primary-rgb: 0, 230, 118;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #00ca68;
+  --ion-color-primary-tint: #1ae983;
+
+  /* Cor Secundária: Preto Moderno */
+  --ion-color-secondary: #222222;
+  --ion-color-secondary-rgb: 34, 34, 34;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #1e1e1e;
+  --ion-color-secondary-tint: #383838;
+
+  /* Fundo SEMPRE BRANCO */
+  --ion-background-color: #ffffff;
+  --ion-background-color-rgb: 255, 255, 255;
+
+  /* Texto SEMPRE PRETO */
+  --ion-text-color: #000000;
+  --ion-text-color-rgb: 0, 0, 0;
+
+  --ion-color-step-50: #f2f2f2;
+  --ion-color-step-100: #e6e6e6;
+  --ion-color-step-150: #d9d9d9;
+  --ion-color-step-200: #cccccc;
+}
+
+// Remove suporte a modo escuro do sistema
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ion-background-color: #ffffff !important;
+    --ion-text-color: #000000 !important;
+  }
+}

@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalhes do Usuário</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="!loading">
+
+  <div class="user-profile-header">
+    <ion-avatar class="large-avatar">
+      <img [src]="usuario.fotoBase64 || 'assets/icon/favicon.png'" />
+    </ion-avatar>
+    <h2>{{ usuario.nome }}</h2>
+    <p>{{ usuario.email }}</p>
+  </div>
+
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">CPF</ion-label>
+      <ion-input [(ngModel)]="usuario.cpf" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Peso (kg)</ion-label>
+      <ion-input [(ngModel)]="usuario.peso" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Altura (m)</ion-label>
+      <ion-input [(ngModel)]="usuario.altura" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Biotipo</ion-label>
+      <ion-select [(ngModel)]="usuario.biotipo" placeholder="Selecione">
+        <ion-select-option value="Ectomorfo">Ectomorfo</ion-select-option>
+        <ion-select-option value="Mesomorfo">Mesomorfo</ion-select-option>
+        <ion-select-option value="Endomorfo">Endomorfo</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" class="ion-margin-top" (click)="salvarAlteracoes()">
+    Salvar Alterações
+  </ion-button>
+
+</ion-content>
+
+<!-- Skeleton Loading para enquanto carrega -->
+<ion-content *ngIf="loading">
+  <div class="ion-padding ion-text-center">
+    <ion-spinner></ion-spinner>
+    <p>Carregando dados...</p>
+  </div>
+</ion-content>

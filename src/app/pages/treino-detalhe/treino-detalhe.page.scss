@@ -1,0 +1,74 @@
+/* Ajuste do container do vídeo */
+.video-card {
+  width: 100%;
+  height: 220px;
+  background: #000; /* Fundo preto enquanto carrega */
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  margin-bottom: 25px;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+}
+
+/* Cabeçalho de Foco (Ex: Foco em Hipertrofia) */
+.info-header {
+  margin-bottom: 20px;
+  h2 {
+    font-size: 14px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+    font-weight: 600;
+  }
+  p {
+    font-size: 22px;
+    font-weight: 800;
+    color: #222;
+    margin: 5px 0 0 0;
+  }
+}
+
+/* Título "Desafio de Hoje" */
+.lista-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+  padding-left: 5px;
+}
+
+/* Estilo de cada item da lista (Exercício) */
+.exercicio-item {
+  --background: white;
+  --padding-start: 15px;
+  --padding-end: 15px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  --border-radius: 16px; /* Arredonda o item */
+  
+  border-radius: 16px; /* Garante arredondamento externo */
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04); /* Sombra suave */
+  
+  /* Remove linhas de separação padrão do Ionic */
+  --inner-border-width: 0; 
+}
+
+/* Card de Hidratação */
+.dica-card {
+  border-radius: 16px;
+  margin-top: 30px;
+  box-shadow: 0 8px 25px rgba(0, 230, 118, 0.25); /* Sombra verde */
+}
+
+/* Espaço para o botão flutuante no final */
+.save-btn-container {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,75 @@
+<ion-content style="--background: #ffffff; --padding-bottom: 80px;">
+  
+  <div class="perfil-container">
+    
+    <!-- HEADER -->
+    <div class="top-nav">
+      <div class="back-btn" routerLink="/home">
+        <ion-icon name="arrow-back"></ion-icon>
+      </div>
+      <h3>Meu Perfil</h3>
+      
+      <!-- BOTÃO SAIR (NOVO) -->
+      <div class="logout-btn" (click)="logout()" style="color: #ff4d4d; font-size: 24px; cursor: pointer;">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </div>
+    </div>
+
+    <!-- AVATAR -->
+    <div class="avatar-area" (click)="triggerUpload()">
+      <div class="image-wrapper">
+        <img [src]="fotoPreview || 'assets/icon/favicon.png'" />
+      </div>
+      <div class="edit-badge">
+        <ion-icon name="camera"></ion-icon>
+      </div>
+    </div>
+    
+    <!-- Input escondido para o upload funcionar no PC e Mobile -->
+    <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;" accept="image/*">
+
+    <div class="user-info">
+      <h2>{{ userData.nome }}</h2>
+      <p>{{ userData.email }}</p>
+    </div>
+
+    <div class="form-section">
+      <div class="input-group">
+        <label>Bio / Objetivos</label>
+        <textarea [(ngModel)]="novaBio" placeholder="Escreva aqui seus objetivos..."></textarea>
+      </div>
+
+      <button class="save-btn" (click)="salvarPerfil()">
+        SALVAR ALTERAÇÕES
+      </button>
+    </div>
+
+  </div>
+</ion-content>
+
+<!-- MENU INFERIOR FIXO -->
+<div class="bottom-tab-bar">
+  <!-- Botão Home (Cinza) -->
+  <div class="tab-item" routerLink="/home">
+    <div class="icon-box">
+      <ion-icon name="grid"></ion-icon>
+    </div>
+    <span>Home</span>
+  </div>
+
+  <!-- Botão Evolução (Cinza) -->
+  <div class="tab-item" routerLink="/evolucao">
+    <div class="icon-box">
+      <ion-icon name="stats-chart"></ion-icon>
+    </div>
+    <span>Evolução</span>
+  </div>
+
+  <!-- Botão Perfil (VERDE/ACTIVE) -->
+  <div class="tab-item active">
+    <div class="icon-box">
+      <ion-icon name="person"></ion-icon>
+    </div>
+    <span>Perfil</span>
+  </div>
+</div>

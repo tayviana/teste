@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <!-- O NOME QUE VAI APARECER NO CELULAR (TUDO MAIÚSCULO) -->
+    <string name="app_name">VIVAFIT</string>
+    
+    <!-- TÍTULO DA ATIVIDADE PRINCIPAL (GERALMENTE IGUAL AO NOME) -->
+    <string name="title_activity_main">VIVAFIT</string>
+    
+    <!-- PACOTE E URL (PADRÃO DO IONIC) -->
+    <string name="package_name">io.ionic.starter</string>
+    <string name="custom_url_scheme">io.ionic.starter</string>
+</resources>
