@@ -1,229 +1,165 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <!-- BOTÃO VOLTAR -->
+<ion-header>
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="voltar()">
-        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        <ion-icon name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    
-    <ion-title>
-      <ion-icon name="fast-food" slot="start"></ion-icon>
-      Meu Plano Alimentar
-    </ion-title>
+    <ion-title>Meu Plano Alimentar</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <!-- CARREGANDO -->
-  <div *ngIf="carregando" class="loading">
-    <ion-spinner></ion-spinner>
-    <p>Carregando seu plano alimentar...</p>
+<ion-content class="ion-padding">
+  <!-- SELEÇÃO DE BIOTIPO -->
+  <div class="selection-section">
+    <h2>🎯 Escolha Seu Plano Alimentar</h2>
+    <p class="subtitle">Selecione conforme seu biotipo</p>
+
+    <div class="biotipo-cards">
+      <!-- ECTOMORFO -->
+      <div 
+        class="biotipo-card" 
+        [class.selected]="biotipoSelecionado === 'ECTOMORFO'"
+        (click)="selecionarBiotipo('ECTOMORFO')">
+        <div class="card-icon">💪</div>
+        <div class="card-content">
+          <h3>Ectomorfo</h3>
+          <p class="card-subtitle">Ganho de Massa</p>
+          <div class="card-details">
+            <p><strong>Meta:</strong> 2.800 kcal</p>
+            <p>Alto teor calórico</p>
+            <small>Ideal para ganhar massa muscular</small>
+          </div>
+        </div>
+        <div class="selected-indicator" *ngIf="biotipoSelecionado === 'ECTOMORFO'">✓</div>
+      </div>
+
+      <!-- MESOMORFO -->
+      <div 
+        class="biotipo-card" 
+        [class.selected]="biotipoSelecionado === 'MESOMORFO'"
+        (click)="selecionarBiotipo('MESOMORFO')">
+        <div class="card-icon">⚖️</div>
+        <div class="card-content">
+          <h3>Mesomorfo</h3>
+          <p class="card-subtitle">Manutenção</p>
+          <div class="card-details">
+            <p><strong>Meta:</strong> 2.200 kcal</p>
+            <p>Equilíbrio perfeito</p>
+            <small>Manter e definir músculos</small>
+          </div>
+        </div>
+        <div class="selected-indicator" *ngIf="biotipoSelecionado === 'MESOMORFO'">✓</div>
+      </div>
+
+      <!-- ENDOMORFO -->
+      <div 
+        class="biotipo-card" 
+        [class.selected]="biotipoSelecionado === 'ENDOMORFO'"
+        (click)="selecionarBiotipo('ENDOMORFO')">
+        <div class="card-icon">🔥</div>
+        <div class="card-content">
+          <h3>Endomorfo</h3>
+          <p class="card-subtitle">Perda de Gordura</p>
+          <div class="card-details">
+            <p><strong>Meta:</strong> 1.800 kcal</p>
+            <p>Baixo teor calórico</p>
+            <small>Foco em emagrecimento</small>
+          </div>
+        </div>
+        <div class="selected-indicator" *ngIf="biotipoSelecionado === 'ENDOMORFO'">✓</div>
+      </div>
+    </div>
   </div>
 
-  <!-- DATA SELECTOR -->
-  <ion-card *ngIf="!carregando">
-    <ion-card-header>
-      <ion-card-title>
-        <ion-icon name="calendar" slot="start"></ion-icon>
-        Data do Plano
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-datetime-button datetime="datetime"></ion-datetime-button>
-      <ion-modal [keepContentsMounted]="true">
-        <ng-template>
-          <ion-datetime 
-            id="datetime"
-            [(ngModel)]="dataSelecionada"
-            (ionChange)="onDataChange()"
-            presentation="date"
-            locale="pt-BR">
-          </ion-datetime>
-        </ng-template>
-      </ion-modal>
-    </ion-card-content>
-  </ion-card>
+  <!-- SELEÇÃO DE DIA -->
+  <div class="selection-section" *ngIf="biotipoSelecionado">
+    <h3>📅 Selecione o Dia da Semana</h3>
+    
+    <div class="dias-buttons">
+      <ion-button 
+        *ngFor="let dia of ['SEGUNDA', 'TERCA', 'QUARTA', 'QUINTA', 'SEXTA', 'SABADO', 'DOMINGO']"
+        [fill]="diaSelecionado === dia ? 'solid' : 'outline'"
+        (click)="selecionarDia(dia)"
+        size="small">
+        {{ getDiaDisplay(dia) }}
+      </ion-button>
+    </div>
+  </div>
 
-  <!-- RESUMO DE TOTAIS -->
-  <ion-card *ngIf="planoHoje && !carregando">
+  <!-- RESUMO DO DIA -->
+  <ion-card *ngIf="planoHoje && planoHoje.refeicoes.length > 0" class="resumo-card">
     <ion-card-header>
-      <ion-card-title>Resumo do Dia</ion-card-title>
+      <ion-card-title>📊 Resumo do Dia - {{ dietaAtual?.nome }}</ion-card-title>
+      <ion-card-subtitle>{{ dataSelecionada | date:'dd/MM/yyyy' }} • {{ getDiaDisplay(diaSelecionado) }}</ion-card-subtitle>
     </ion-card-header>
+    
     <ion-card-content>
       <div class="resumo-grid">
         <div class="resumo-item">
-          <div class="resumo-valor">{{planoHoje.totalCalorias}}</div>
-          <div class="resumo-label">Calorias</div>
-          <ion-progress-bar 
-            [value]="calcularPorcentagemMeta() / 100"
-            [color]="calcularPorcentagemMeta() > 100 ? 'danger' : 'success'">
-          </ion-progress-bar>
-          <div class="resumo-meta">Meta: {{planoHoje.metaCalorias}} kcal</div>
+          <div class="resumo-valor">{{ planoHoje.totalCalorias }}</div>
+          <div class="resumo-label">CALORIAS</div>
+          <div class="resumo-meta">Meta: {{ planoHoje.metaCalorias }} kcal</div>
         </div>
         
         <div class="resumo-item">
-          <div class="resumo-valor">{{planoHoje.totalProteinas}}g</div>
-          <div class="resumo-label">Proteínas</div>
+          <div class="resumo-valor">{{ planoHoje.totalProteinas }}g</div>
+          <div class="resumo-label">PROTEÍNAS</div>
         </div>
         
         <div class="resumo-item">
-          <div class="resumo-valor">{{planoHoje.totalCarboidratos}}g</div>
-          <div class="resumo-label">Carboidratos</div>
+          <div class="resumo-valor">{{ planoHoje.totalCarboidratos }}g</div>
+          <div class="resumo-label">CARBOIDRATOS</div>
         </div>
         
         <div class="resumo-item">
-          <div class="resumo-valor">{{planoHoje.totalGorduras}}g</div>
-          <div class="resumo-label">Gorduras</div>
+          <div class="resumo-valor">{{ planoHoje.totalGorduras }}g</div>
+          <div class="resumo-label">GORDURAS</div>
         </div>
       </div>
     </ion-card-content>
   </ion-card>
 
   <!-- LISTA DE REFEIÇÕES -->
-  <ion-card *ngIf="planoHoje && !carregando">
-    <ion-card-header>
-      <ion-card-title>Refeições do Dia</ion-card-title>
-      <ion-button 
-        fill="solid" 
-        color="primary" 
-        size="small"
-        (click)="mostrarFormRefeicao = true">
-        <ion-icon name="add" slot="start"></ion-icon>
-        Nova Refeição
-      </ion-button>
-    </ion-card-header>
+  <div *ngIf="planoHoje && planoHoje.refeicoes.length > 0" class="refeicoes-section">
+    <h3>🍽️ Refeições do Dia ({{ planoHoje.refeicoes.length }})</h3>
+    
+    <div class="refeicoes-list">
+      <ion-card *ngFor="let refeicao of planoHoje.refeicoes" class="refeicao-card">
+        <ion-card-header>
+          <ion-card-title>{{ refeicao.nome }}</ion-card-title>
+          <ion-card-subtitle>
+            <span class="refeicao-tipo">{{ refeicao.tipo }}</span> • 
+            <span class="refeicao-horario">{{ refeicao.horario }}</span>
+          </ion-card-subtitle>
+        </ion-card-header>
+        
+        <ion-card-content>
+          <div class="macros-info">
+            <span class="macro-item">{{ refeicao.calorias }} kcal</span>
+            <span class="macro-item">{{ refeicao.proteinas }}g P</span>
+            <span class="macro-item">{{ refeicao.carboidratos }}g C</span>
+            <span class="macro-item">{{ refeicao.gorduras }}g G</span>
+          </div>
+          
+          <p class="observacoes" *ngIf="refeicao.observacoes">
+            {{ refeicao.observacoes }}
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
 
-    <ion-card-content>
-      <!-- MENSAGEM VAZIA -->
-      <div *ngIf="planoHoje.refeicoes.length === 0" class="empty-state">
-        <ion-icon name="fast-food" size="large"></ion-icon>
-        <h3>Nenhuma refeição cadastrada</h3>
-        <p>Clique em "Nova Refeição" para começar!</p>
-      </div>
+  <!-- MENSAGEM QUANDO NÃO HÁ REFEIÇÕES -->
+  <div *ngIf="!planoHoje || planoHoje.refeicoes.length === 0" class="empty-state">
+    <div class="empty-icon">🍽️</div>
+    <h3>Nenhuma refeição encontrada</h3>
+    <p>Selecione um biotipo e um dia da semana para ver o plano alimentar</p>
+  </div>
 
-      <!-- LISTA DE REFEIÇÕES -->
-      <ion-list *ngIf="planoHoje.refeicoes.length > 0">
-        <ion-item-sliding *ngFor="let refeicao of planoHoje.refeicoes; let i = index">
-          <ion-item>
-            <ion-label>
-              <h2>{{refeicao.nome}}</h2>
-              <p>{{refeicao.tipo}} • {{refeicao.horario}}</p>
-              <p>
-                <ion-badge color="light">{{refeicao.calorias}} kcal</ion-badge>
-                <ion-badge color="primary">{{refeicao.proteinas}}g P</ion-badge>
-                <ion-badge color="success">{{refeicao.carboidratos}}g C</ion-badge>
-                <ion-badge color="warning">{{refeicao.gorduras}}g G</ion-badge>
-              </p>
-              <p *ngIf="refeicao.observacoes" class="observacoes">{{refeicao.observacoes}}</p>
-            </ion-label>
-          </ion-item>
-
-          <ion-item-options side="end">
-            <ion-item-option color="danger" (click)="removerRefeicao(i)">
-              <ion-icon slot="icon-only" name="trash"></ion-icon>
-            </ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-
-  <!-- MODAL PARA NOVA REFEIÇÃO -->
-  <ion-modal [isOpen]="mostrarFormRefeicao" (didDismiss)="mostrarFormRefeicao = false">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Nova Refeição</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="mostrarFormRefeicao = false">Fechar</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      
-      <ion-content class="ion-padding">
-        <ion-list>
-          <ion-item>
-            <ion-label position="stacked">Nome da Refeição</ion-label>
-            <ion-input 
-              [(ngModel)]="novaRefeicao.nome" 
-              placeholder="Ex: Omelete de claras">
-            </ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked">Tipo de Refeição</ion-label>
-            <ion-select [(ngModel)]="novaRefeicao.tipo" interface="action-sheet">
-              <ion-select-option value="café da manhã">Café da Manhã</ion-select-option>
-              <ion-select-option value="almoço">Almoço</ion-select-option>
-              <ion-select-option value="jantar">Jantar</ion-select-option>
-              <ion-select-option value="lanche">Lanche</ion-select-option>
-            </ion-select>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked">Horário</ion-label>
-            <ion-input 
-              type="time" 
-              [(ngModel)]="novaRefeicao.horario">
-            </ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked">Calorias (kcal)</ion-label>
-            <ion-input 
-              type="number" 
-              [(ngModel)]="novaRefeicao.calorias"
-              placeholder="0">
-            </ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked">Proteínas (g)</ion-label>
-            <ion-input 
-              type="number" 
-              [(ngModel)]="novaRefeicao.proteinas"
-              placeholder="0">
-            </ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked">Carboidratos (g)</ion-label>
-            <ion-input 
-              type="number" 
-              [(ngModel)]="novaRefeicao.carboidratos"
-              placeholder="0">
-            </ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked">Gorduras (g)</ion-label>
-            <ion-input 
-              type="number" 
-              [(ngModel)]="novaRefeicao.gorduras"
-              placeholder="0">
-            </ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked">Observações</ion-label>
-            <ion-textarea 
-              [(ngModel)]="novaRefeicao.observacoes"
-              placeholder="Observações adicionais..."
-              rows="3">
-            </ion-textarea>
-          </ion-item>
-        </ion-list>
-
-        <ion-button 
-          expand="block" 
-          color="primary" 
-          (click)="adicionarRefeicao()"
-          [disabled]="!novaRefeicao.nome">
-          <ion-icon name="add" slot="start"></ion-icon>
-          Adicionar Refeição
-        </ion-button>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
+  <!-- LOADING -->
+  <div *ngIf="carregando" class="loading">
+    <ion-spinner></ion-spinner>
+    <p>Carregando plano alimentar...</p>
+  </div>
 </ion-content>

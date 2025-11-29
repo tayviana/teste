@@ -2,196 +2,258 @@ ion-content {
   --background: #f8f9fa;
 }
 
-.loading {
-  text-align: center;
-  padding: 40px;
+.selection-section {
+  margin-bottom: 24px;
   
-  ion-spinner {
-    margin-bottom: 16px;
-  }
-  
-  p {
-    color: var(--ion-color-medium);
-    margin: 0;
-  }
-}
-
-.resumo-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 8px;
-}
-
-.resumo-item {
-  text-align: center;
-  padding: 12px;
-  background: var(--ion-color-light);
-  border-radius: 12px;
-  
-  .resumo-valor {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: var(--ion-color-primary);
-    margin-bottom: 4px;
-  }
-  
-  .resumo-label {
-    font-size: 0.8em;
-    color: var(--ion-color-medium);
+  h2 {
+    color: #2c3e50;
     margin-bottom: 8px;
-    text-transform: uppercase;
+    font-weight: 600;
+  }
+  
+  .subtitle {
+    color: #7f8c8d;
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+}
+
+.biotipo-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  
+  .biotipo-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid #e9ecef;
+    position: relative;
+    
+    &.selected {
+      border-color: #3880ff;
+      background: rgba(56, 128, 255, 0.05);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(56, 128, 255, 0.15);
+    }
+    
+    &:hover {
+      border-color: #3880ff;
+      transform: translateY(-1px);
+    }
+    
+    .card-icon {
+      font-size: 32px;
+      flex-shrink: 0;
+    }
+    
+    .card-content {
+      flex: 1;
+      
+      h3 {
+        margin: 0 0 4px 0;
+        color: #2c3e50;
+        font-weight: 600;
+      }
+      
+      .card-subtitle {
+        color: #3880ff;
+        font-weight: 500;
+        margin: 0 0 12px 0;
+        font-size: 14px;
+      }
+      
+      .card-details {
+        p {
+          margin: 4px 0;
+          color: #5a6c7d;
+          font-size: 14px;
+        }
+        
+        small {
+          color: #7f8c8d;
+          font-size: 12px;
+        }
+      }
+    }
+    
+    .selected-indicator {
+      background: #3880ff;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+  }
+}
+
+.dias-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  
+  ion-button {
+    --border-radius: 12px;
+    min-width: 70px;
+  }
+}
+
+.resumo-card {
+  border-radius: 16px;
+  margin: 16px 0;
+  
+  .resumo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    
+    .resumo-item {
+      text-align: center;
+      padding: 12px;
+      background: #f8f9fa;
+      border-radius: 12px;
+      
+      .resumo-valor {
+        font-size: 24px;
+        font-weight: bold;
+        color: #3880ff;
+        margin-bottom: 4px;
+      }
+      
+      .resumo-label {
+        font-size: 12px;
+        color: #7f8c8d;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 2px;
+      }
+      
+      .resumo-meta {
+        font-size: 10px;
+        color: #95a5a6;
+      }
+    }
+  }
+}
+
+.refeicoes-section {
+  margin-top: 24px;
+  
+  h3 {
+    color: #2c3e50;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+}
+
+.refeicoes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.refeicao-card {
+  border-radius: 16px;
+  margin: 0;
+  
+  .refeicao-tipo {
+    text-transform: capitalize;
+    color: #3880ff;
     font-weight: 500;
   }
   
-  .resumo-meta {
-    font-size: 0.7em;
-    color: var(--ion-color-medium);
-    margin-top: 4px;
+  .refeicao-horario {
+    color: #7f8c8d;
+  }
+  
+  .macros-info {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+    
+    .macro-item {
+      background: #e3f2fd;
+      color: #1976d2;
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+  
+  .observacoes {
+    color: #5a6c7d;
+    font-size: 14px;
+    margin: 0;
+    padding: 8px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-style: italic;
   }
 }
 
 .empty-state {
   text-align: center;
   padding: 40px 20px;
+  color: #7f8c8d;
   
-  ion-icon {
-    color: var(--ion-color-medium);
+  .empty-icon {
+    font-size: 48px;
     margin-bottom: 16px;
   }
   
   h3 {
-    color: var(--ion-color-dark);
-    margin: 0 0 8px 0;
-    font-weight: 600;
+    margin-bottom: 8px;
+    color: #5a6c7d;
+  }
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  
+  ion-spinner {
+    margin-bottom: 16px;
   }
   
   p {
-    color: var(--ion-color-medium);
+    color: #7f8c8d;
     margin: 0;
-    font-size: 0.9em;
   }
 }
 
-.observacoes {
-  font-size: 0.8em;
-  color: var(--ion-color-medium);
-  font-style: italic;
-  margin-top: 4px;
-}
-
-// Estilos para os badges das refeições
-ion-badge {
-  margin-right: 4px;
-  margin-top: 4px;
-  font-size: 0.7em;
-}
-
-// Header com ícone
-ion-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  
-  ion-icon {
-    font-size: 1.2em;
-  }
-}
-
-// Card headers melhorados
-ion-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 0;
-  
-  ion-card-title {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 1.1em;
-    
-    ion-icon {
-      font-size: 1em;
-      color: var(--ion-color-primary);
-    }
-  }
-}
-
-// Lista de refeições
-ion-list {
-  background: transparent;
-  
-  ion-item {
-    --background: transparent;
-    --padding-start: 0;
-    --inner-padding-end: 0;
-    margin-bottom: 8px;
-    border-radius: 8px;
-    background: white;
-    
-    ion-label {
-      h2 {
-        font-weight: 600;
-        color: var(--ion-color-dark);
-      }
-      
-      p {
-        color: var(--ion-color-medium);
-      }
-    }
-  }
-}
-
-// Modal styles
-ion-modal {
-  --height: 80%;
-  --border-radius: 16px;
-  
-  ion-content {
-    --padding-top: 0;
-  }
-}
-
-// Datetime button customizado
-ion-datetime-button::part(native) {
-  background: var(--ion-color-primary);
-  color: white;
-  border-radius: 8px;
-}
-
-// Progress bar customizada
-ion-progress-bar {
-  margin-top: 8px;
-  border-radius: 4px;
-  height: 6px;
-}
-
-// Responsividade para telas maiores
+// Responsividade
 @media (min-width: 768px) {
+  .biotipo-cards {
+    flex-direction: row;
+    
+    .biotipo-card {
+      flex: 1;
+    }
+  }
+  
   .resumo-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr 1fr 1fr 1fr !important;
   }
   
-  ion-modal {
-    --width: 500px;
-    --height: 600px;
+  .dias-buttons {
+    justify-content: center;
   }
-}
-
-// Animações suaves
-ion-item-sliding {
-  transition: all 0.3s ease;
-  
-  &:active {
-    transform: scale(0.98);
-  }
-}
-
-// Botão flutuante alternativo (caso queira adicionar depois)
-.fab-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
 }
