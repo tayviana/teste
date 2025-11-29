@@ -1,15 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <!-- BOTÃO VOLTAR FUNCIONAL -->
+    <ion-buttons slot="start">
+      <ion-button (click)="voltar()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+    <ion-title>Meu Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content style="--background: #ffffff; --padding-bottom: 80px;">
   
   <div class="perfil-container">
     
-    <!-- HEADER -->
+    <!-- HEADER PERSONALIZADO -->
     <div class="top-nav">
-      <div class="back-btn" routerLink="/home">
-        <ion-icon name="arrow-back"></ion-icon>
-      </div>
+      <!-- ESPAÇO VAZIO PARA ALINHAR COM O TÍTULO -->
+      <div style="width: 48px;"></div>
+      
       <h3>Meu Perfil</h3>
       
-      <!-- BOTÃO SAIR (NOVO) -->
+      <!-- BOTÃO SAIR -->
       <div class="logout-btn" (click)="logout()" style="color: #ff4d4d; font-size: 24px; cursor: pointer;">
         <ion-icon name="log-out-outline"></ion-icon>
       </div>

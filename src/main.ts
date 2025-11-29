@@ -23,7 +23,7 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes),
 
     // --- INICIALIZAÇÃO DO FIREBASE ---
-    provideFirebaseApp(() => initializeApp(environment.firebase)), // Usa suas chaves
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)), // CORRIGIDO: firebase → firebaseConfig
     provideFirestore(() => getFirestore()), // Liga o Banco de Dados
     provideAuth(() => getAuth()), // Liga o Login
   ],

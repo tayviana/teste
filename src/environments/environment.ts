@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  firebase: {
+  firebaseConfig: {
     apiKey: "AIzaSyAVWLWQs-cWqc_ms8O_G4GbEbgHZWymeVA",
     authDomain: "vivafit-71e4c.firebaseapp.com",
     projectId: "vivafit-71e4c",

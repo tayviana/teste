@@ -1,0 +1,197 @@
+ion-content {
+  --background: #f8f9fa;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  
+  ion-spinner {
+    margin-bottom: 16px;
+  }
+  
+  p {
+    color: var(--ion-color-medium);
+    margin: 0;
+  }
+}
+
+.resumo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.resumo-item {
+  text-align: center;
+  padding: 12px;
+  background: var(--ion-color-light);
+  border-radius: 12px;
+  
+  .resumo-valor {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--ion-color-primary);
+    margin-bottom: 4px;
+  }
+  
+  .resumo-label {
+    font-size: 0.8em;
+    color: var(--ion-color-medium);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  
+  .resumo-meta {
+    font-size: 0.7em;
+    color: var(--ion-color-medium);
+    margin-top: 4px;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  
+  ion-icon {
+    color: var(--ion-color-medium);
+    margin-bottom: 16px;
+  }
+  
+  h3 {
+    color: var(--ion-color-dark);
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+  
+  p {
+    color: var(--ion-color-medium);
+    margin: 0;
+    font-size: 0.9em;
+  }
+}
+
+.observacoes {
+  font-size: 0.8em;
+  color: var(--ion-color-medium);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+// Estilos para os badges das refeições
+ion-badge {
+  margin-right: 4px;
+  margin-top: 4px;
+  font-size: 0.7em;
+}
+
+// Header com ícone
+ion-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+  ion-icon {
+    font-size: 1.2em;
+  }
+}
+
+// Card headers melhorados
+ion-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0;
+  
+  ion-card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1em;
+    
+    ion-icon {
+      font-size: 1em;
+      color: var(--ion-color-primary);
+    }
+  }
+}
+
+// Lista de refeições
+ion-list {
+  background: transparent;
+  
+  ion-item {
+    --background: transparent;
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    background: white;
+    
+    ion-label {
+      h2 {
+        font-weight: 600;
+        color: var(--ion-color-dark);
+      }
+      
+      p {
+        color: var(--ion-color-medium);
+      }
+    }
+  }
+}
+
+// Modal styles
+ion-modal {
+  --height: 80%;
+  --border-radius: 16px;
+  
+  ion-content {
+    --padding-top: 0;
+  }
+}
+
+// Datetime button customizado
+ion-datetime-button::part(native) {
+  background: var(--ion-color-primary);
+  color: white;
+  border-radius: 8px;
+}
+
+// Progress bar customizada
+ion-progress-bar {
+  margin-top: 8px;
+  border-radius: 4px;
+  height: 6px;
+}
+
+// Responsividade para telas maiores
+@media (min-width: 768px) {
+  .resumo-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  ion-modal {
+    --width: 500px;
+    --height: 600px;
+  }
+}
+
+// Animações suaves
+ion-item-sliding {
+  transition: all 0.3s ease;
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Botão flutuante alternativo (caso queira adicionar depois)
+.fab-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}

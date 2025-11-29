@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common'; // ADICIONE Location AQUI
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { 
@@ -38,9 +38,15 @@ export class PerfilPage implements OnInit {
     private auth: Auth,
     private firestore: Firestore,
     private toast: ToastController,
-    private router: Router
+    private router: Router,
+    private location: Location // ADICIONE Location AQUI
   ) { 
     addIcons({ camera, arrowBack, grid, statsChart, person, logOutOutline });
+  }
+
+  // BOTÃO VOLTAR FUNCIONAL - ADICIONE ESTE MÉTODO
+  voltar() {
+    this.location.back();
   }
 
   async ngOnInit() {
